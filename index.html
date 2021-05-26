@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>関数</title>
+
+</head>
+
+<body>
+  <br>
+  <h1>ドルから円に変換します</h1>
+  </br>
+  <form name="myform">
+    <br><input type="text" name ="doll" /></br>
+  </form>
+    <button id="btn">変換</button>
+    <div id="output"></div>
+  <script>
+    const btn = document.getElementById("btn");
+    const output = document.getElementById("output");
+
+    const DollarToYen = (number) => {
+      return number * 108;
+    }
+    btn.addEventListener('click', () => {
+      const form = document.forms.myform;
+      console.log(form);
+      const dollar = parseInt(form.doll.value);
+      if (dollar) {
+        const Yen = document.createElement("p");
+        Yen.textContent = dollar + 'ドル　⇒　' + DollarToYen(dollar) + "円です"
+        output.appendChild(Yen);
+
+      } else if (isNaN(dollar)) {
+        const nan = document.createElement("p");
+        nan.textContent = '※ドルを入力してください'
+        output.appendChild(nan);
+      }
+      
+    })
+  </script>
+</body>
+
+</html>

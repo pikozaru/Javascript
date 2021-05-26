@@ -1,0 +1,94 @@
+
+5章
+<body>
+  <input type='button' id='attack' value="攻撃" />
+  <input type='button' id='escape' value="逃げる" />
+  <input type='button' id='retry' value="再戦" disabled/>
+  <div id='output'></div>
+
+  <script>
+    let enemy = 10;
+    
+    const attack = document.getElementById('attack');
+    const escape = document.getElementById('escape');
+    const retry = document.getElementById('retry');
+    const output = document.getElementById("output");
+    
+    attack.addEventListener('click', () => {
+      const random = Math.floor(Math.random() * 10);
+      
+      const p1 = document.createElement('p');
+      p1.textContent = random + 'の攻撃！';
+      output.appendChild(p1);
+      
+      enemy = enemy - random;
+      
+      if(enemy <= 0) {
+        const p3 = document.createElement('p');
+        p3.textContent = '敵を倒した！';
+        output.appendChild(p3);
+        
+        attack.disabled = true;
+        escape.disabled = true;
+        retry.disabled = false;
+      } else {
+        const p2 = document.createElement('p');
+        p2.textContent = '敵の体力は残り' + enemy + 'です';
+        output.appendChild(p2);
+      }
+    });
+
+    escape.addEventListener('click', () => {
+      const p4 = document.createElement('p');
+      p4.textContent = '無事逃げました';
+      output.appendChild(p4);
+    
+      attack.disabled = true;
+      escape.disabled = true;
+      retry.disabled = false;
+    });
+
+    retry.addEventListener('click', () => {
+      output.innerHTML = ''
+      enemy = 10;
+      
+      attack.disabled = false;
+      escape.disabled = false;
+      retry.disabled = true;
+    });
+    
+    
+    6章
+    <body>
+  <br>
+  <h1>ドルから円に変換します</h1>
+  </br>
+  <form name="myForm">
+    <br><input type="text" id="doll" /></br>
+    <input type="button" id="btn" value="変換">
+    <div id="output"></div>
+  </form>
+  <script>
+    const btn = document.getElementById("btn");
+    const output = document.getElementById("output");
+
+    const DollarToYen = (number) => {
+      return number * 108;
+    }
+    btn.addEventListener('click', () => {
+      const doll = document.getElementById("doll");
+      const dollar = parseInt(doll);
+      if (dollar) {
+        const Yen = document.createElement("p");
+        Yen.textContent = dollar + 'ドル　⇒　' + DollarToYen(dollar) + "円です"
+        Yen.appendChild(output);
+
+      }
+      else if (isNaN(dollar)) {
+        const nan = document.createElement("p");
+        nan.textContent = '※ドルを入力してください'
+        nan.appendChild(output);
+      }
+    })
+  </script>
+</body>

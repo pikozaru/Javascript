@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>練習</title>
+
+</head>
+
+<body>
+  <form name="myform">
+    <br>
+    <label>名前を入力してください</label>
+    </br>
+    <input type="text" name="name" />
+
+    <br>
+    <label>電話番号を入力してください</label>
+    </br>
+    <input type="text" name="phone" />
+  </form>
+  <br>
+  <button id="btn">登録</button>
+  </br>
+  <script>
+    const btn = document.getElementById("btn");
+    btn.addEventListener("click", () => {
+      const form = document.forms.myform;
+      console.log(form.name.value);
+      console.log(form.phone.value);
+    })
+  </script>
+</body>
+
+</html>

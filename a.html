@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>サンプルデモ</title>
+  <style>
+    #dialog {
+      width: 100%;
+      padding: 30px 20px;
+      text-align: center;
+      border: 1px solid #aaa;
+      box-shadow: 2px 2px 4px #888;
+    }
+  </style>
+</head>
+<body>
+  <form id="dialog" name="dialog">
+    <h2>敵があらわれた！</h2>
+    <input type="button" name="attack" value="攻撃する" />
+    <input type="button" name="special_skill" value="特技" />
+    <input type="button" name="magic" value="魔法" />
+    <input type="button" name="escape" value="逃げる" />
+    <p id="you_state">あなた・・・HP:100  MP:100  </p>
+    <p id="enemy_state">敵・・・HP:100  MP:100  </p>
+  </form>
+  <script>
+    
+    const form = document.forms.dialog;
+    const random = Math.floor(Math.random() * 10);
+    const you_state = document.getElementById("you_state");
+    const enemy_state = document.getElementById("enemy_state");
+    class Character {
+      constructor(name,hp,mp) {
+        this.name = name;
+        this.hp = hp;
+        this.mp = mp;
+      }
+    }  
+      
+    class You extends Character {
+      constructor(name,hp,mp,exp) {
+        super (name,hp,mp);
+        
+        this.exp = exp;
+      }
+     
+     attack() {
+        form.attack.addEventListener("click", () => {
+          const p = document.createElement('p');
+          p.textContent = this.name + 'の攻撃！';
+          const promise1 = () => {
+            return new Promise(resolve => {
+              setTimeout(() => {
+              const pd = document.createElement('p');
+              resolve(random + 'のダメージ');
+              }, 500);
+            })
+          }
+          const promise2 = () => {
+            return new Promise(resolve => {
+              setTimeout(() => {
+              resolve(this.name + '・・・HP:' + this.hp + '　MP:' + this.mp);
+              
+              }, 500);
+            })
+          }
+          promise1()
+          .then(data => {
+            document.body.appendChild(pd);
+            return promise2();
+          })
+          .then(data => {
+            document.body.appendChild(you_state)
+          })
+        }) 
+      
+      }
+    }
+    
+    class Enemy extends Character {
+      attack() {
+        form.attack.addEventListener("click", () => {
+          const p = document.createElement('p');
+          p.textContent = this.name + 'の攻撃！';
+          document.body.appendChild(p);
+          const promise1 = () => {
+            return new Promise(resolve => {
+          setTimeout(() => {
+            const pd = document.createElement('p');
+            pd.textContent = random + 'のダメージ';
+            document.body.appendChild(pd);
+          }, 500);
+            })
+          }
+          const promise2 = () => {
+            return new Promise(resolve => {
+          setTimeout(() => {
+          enemy_state.textContent = this.name + '・・・HP:' + this.hp + '　MP:' + this.mp;
+          document.body.appendChild(enemy_state);
+          }, 500);
+            })
+          }  
+        }) 
+      
+    }
+    }
+    
+    const you = new You('あなた', 100, 100, 10);
+    const enemy = new Enemy('敵', 100);
+    
+    you.attack();
+    enemy.attack();
+  </script>
+</body>
+</html>

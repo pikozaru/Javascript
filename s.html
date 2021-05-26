@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>あ</title>
+</head>
+<body>
+  <form name="myForm">
+    <div><label>名前：<input type="text" name="name" /></label></div>
+    <div><label>メールアドレス：<input type="email" name="email" /></div>
+    <div style="margin-bottom:1em;">
+      <label>年齢：</label>
+      <input type="radio" id='name' name="age" value="20"/><label for='name'>20代</label>
+      <label><input type="radio" name="age" value="30"/>30代</label>
+      <label><input type="radio" name="age" value="40"/>40代</label>
+      <label><input type="radio" name="age" value="50"/>50代</label>
+    </div>
+    <label>普段使っているスマホは？</label><br/>
+    <label><input type="checkbox" name="phone" value="iPhone">iPhone</label>
+    <label><input type="checkbox" name="phone" value="Android">Android</label>
+    <label><input type="checkbox" name="phone" value="oldphone">ガラケー</label>
+    <label><input type="checkbox" name="phone" value="etc">その他</label>
+  </form>
+  
+  <button id="btn">実行</button>
+  <script>
+    const btn = document.getElementById('btn');
+    
+    btn.addEventListener("click", () => {
+      const getName = document.forms.myForm.name;
+      console.log(getName.name.value);
+      
+      const getEmail = document.forms.myForm.email;
+      console.log(getEmail.email.value);
+      
+      const radio = document.forms.myForm.age;
+      console.log(radio.age.value);
+      
+      const checkbox = document.forms.myForm.phone;
+      checkbox.phone.forEach(item => {
+        if(item.checked) console.log(item.value);
+      })
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+6章別解
+function dollarToYen(dollar) {
+    return dollar * 108;
+}
+
+while (true) {
+    let dollarText = prompt("ドルを入力してください。");
+    let dollar = parseInt(dollarText);
+    
+    if (isNaN(dollar)) {
+        console.log("キャンセルされたので終了します。");
+        break;
+    }
+    
+    let yen = dollarToYen(dollar);
+    console.log(yen + "円です");
+}
+
+
+
+
+
+<body>
+  <p id="p1"></p>
+  <p id="p2"></p>
+  <p id="p3"></p>
+  <p id="p4"></p>
+  <h2 id="finish"></h2>
+  <script>
+    const p1 = document.getElementById("p1");
+    const p2 = document.getElementById("p2");
+    const p3 = document.getElementById("p3");
+    const p4 = document.getElementById("p4");
+    const finish = document.getElementById("finish");
+    let enemy = 10;
+    
+    while(true) {
+      const command = prompt('敵が現れた！（1.攻撃 2.逃げる）');
+      const random = Math.floor(Math.random * 10);
+      
+      if(command === '1') {
+        p1.textContent = random + 'の攻撃！';
+        p1.appendChild(p1)
+        enemy = enemy - random;
+        
+        if(enemy <= 0) {
+
+          p3.textContent = '敵を倒した！';
+          p3.appendChild(p3);
+          break;
+        }
+      p2.textContent = '敵の体力は残り' + enemy + 'です';
+      p2.appendChild(p2);
+      }
+      
+      else if(command === '2') {
+        p4.textContent = '無事逃げました';
+        p4.appendChild(p4);
+        break;
+      }
+      
+    }
+    finish.textContent = 'ゲーム終了';
+    finish.appendChild(finish);
+  </script>
+</body>
+
+
+
+
+const DollarToYen = (number) => {
+      return number * 108;
+    }
+    
+    while (true) {
+      const money = prompt('ドルを円に変換します');
+      const moneyText = parseInt('money');
+      
+      if(isNaN(moneyText)) {
+        const p1 = document.createElement('p');
+        p1.textContent = 'キャンセルされたので終了します';
+        document.body.appendChild(p1);
+        break;
+      }
+      
+      const Yen = DollarToYen(moneyText);
+      const p2 = document.createElement('p');
+      p2.textContent = Yen + '円です';
+      document.body.appendChild(p2);
+    }
+  </script>
